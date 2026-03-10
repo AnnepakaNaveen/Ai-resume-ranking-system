@@ -1,9 +1,8 @@
+# paste your updated code here
 import streamlit as st
-import pandas as pd
-from pdfminer.high_level import extract_text
+from PyPDF2 import PdfReader
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
 
 def extract_text_from_pdf(file):
     pdf = PdfReader(file)
