@@ -4,42 +4,37 @@ from pdfminer.high_level import extract_text
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-st.title("AI Resume Ranking System")
-st.write("Developed by Naveen")
 
-job_description = st.text_area("Enter Job Description")
+def extract_text_from_pdf(file):
+    pdf = PdfReader(file)
+    text = ""
+    for page in pdf.pages:
+        page_text = page.extract_text()
+        if page_text:
+            text += page_text + "\\n"
+    return text.strip() if text else "No readable text found."
 
-uploaded_files = st.file_uploader(
-    "Upload Resume PDFs",
-    type=["pdf"],
-    accept_multiple_files=True
-)
+def rank_resumes(job_description, resumes):
+    documents = [job_description] + resumes
+    vectorizer = TfidfVectorizer().fit_transform(documents)
+    vectors = vectorizer.toarray()
+    
+    job_description_vector = vectors[0]
+    resume_vectors = vectors[1:]
+    cosine_similarities = cosine_similarity([job_description_vector], resume_vectors).flatten()
+    
+    return cosine_similarities
 
-if st.button("Analyze Resumes"):
+st.title("AI Resume Screening & Ranking System")
+job_description = st.text_area("Enter the job description")
+uploaded_files = st.file_uploader("Upload PDF resumes", type=["pdf"], accept_multiple_files=True)
 
-    resume_texts = []
-    resume_names = []
+if uploaded_files and job_description:
+    resumes = [extract_text_from_pdf(file) for file in uploaded_files]
+    scores = rank_resumes(job_description, resumes)
 
-    for file in uploaded_files:
-        text = extract_text(file)
-        resume_texts.append(text)
-        resume_names.append(file.name)
-
-    documents = resume_texts + [job_description]
-
-    vectorizer = TfidfVectorizer()
-    vectors = vectorizer.fit_transform(documents)
-
-    similarity = cosine_similarity(vectors[-1], vectors[:-1])
-
-    scores = similarity.flatten()
-
-    df = pd.DataFrame({
-        "Resume": resume_names,
-        "Score": scores
-    })
-
-    df = df.sort_values(by="Score", ascending=False)
-
-    st.subheader("Resume Ranking Results")
-    st.dataframe(df)
+    ranked_resumes = sorted(zip(uploaded_files, scores), key=lambda x: x[1], reverse=True)
+    
+    st.subheader("Ranked Resumes")
+    for i, (file, score) in enumerate(ranked_resumes, start=1):
+        st.write(f"{i}. {file.name} - Score: {score:.2f}")
