@@ -97,11 +97,14 @@ if st.button("Rank Resumes"):
 
         st.subheader("Detailed Resume Ranking")
 
+        st.subheader("Ranked Resumes (All Scores)")
+
         for i, (file, score) in enumerate(ranked_resumes, start=1):
 
-            st.write(f"### {i}. {file.name}")
-            st.write(f"Cosine: {score['cosine']:.3f}")
-            st.write(f"Jaccard: {score['jaccard']:.3f}")
-            st.write(f"Skill: {score['skill']:.3f}")
-            st.write(f"Final Score: {score['final']:.3f}")
-            st.write("---")
+           st.write(
+              f"{i}. {file.name} → "
+              f"Cosine: {score['cosine-similarity']:.3f}, "
+              f"Jaccard: {score['jaccard-similariity']:.3f}, "
+              f"Skill: {score['skill-match']:.3f}, "
+              f"Final: {score['final']:.3f}"
+    )
