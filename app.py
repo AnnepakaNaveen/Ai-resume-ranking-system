@@ -104,3 +104,15 @@ if st.button("Rank Resumes"):
             f"Skill: {res['skill']:.2f}%, "
             f"Final: {res['final']*100:.2f}%"
         )
+    results = sorted(results, key=lambda x: x["final"], reverse=True)
+    # 🎯 Recommended Resume (Top Match)
+    if len(results) > 0:
+    best = results[0]
+
+    st.success("✅ Recommended Resume for this Job Description")
+
+    st.write(
+        f"📌 {best['name']} → "
+        f"Final Score: {best['final']*100:.2f}%"
+    )
+    
