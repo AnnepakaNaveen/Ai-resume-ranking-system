@@ -99,8 +99,8 @@ if st.button("Rank Resumes"):
     for i, res in enumerate(results, 1):
         st.write(
             f"{i}. {res['name']} → "
-            f"Cosine: {res['cosine']*100:.2f}%, "
-            f"Jaccard: {res['jaccard']*100:.2f}%, "
-            f"Skill: {res['skill']*100:.2f}%, "
+            f"Cosine: {res['cosine']:.2f}%, "
+            f"Jaccard: {res['jaccard']:.2f}%, "
+            f"Skill: {res['skill']:.2f}%, "
             f"Final: {res['final']*100:.2f}%"
         )
