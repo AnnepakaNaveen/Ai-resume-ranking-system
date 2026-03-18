@@ -1,4 +1,57 @@
 import streamlit as st
+from PyPDF2 import PdfReader
+import docx
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+def extract_text(file):
+    text = ""
+
+    if file.name.endswith(".pdf"):
+        pdf = PdfReader(file)
+        for page in pdf.pages:
+            try:
+                page_text = page.extract_text()
+                if page_text:
+                    text += page_text
+            except:
+                pass
+
+    elif file.name.endswith(".docx"):
+        doc = docx.Document(file)
+        for para in doc.paragraphs:
+            text += para.text
+
+    return text.lower()
+def process_job_description(jd):
+    jd = jd.lower()
+    
+    skills = re.split(r',|\n|\s{2,}', jd)
+
+    if len(skills) == 1:
+        skills = jd.split()
+
+    skills = [s.strip() for s in skills if s.strip() != ""]
+    
+    return skills
+def skill_match(resume, jd_list):
+    count = 0
+    for skill in jd_list:
+        if skill in resume:
+            count += 1
+    return count / len(jd_list) if len(jd_list) > 0 else 0
+def jaccard_similarity(resume, jd_list):
+    resume_set = set(resume.split())
+    jd_set = set(" ".join(jd_list).split())
+    
+    return len(resume_set & jd_set) / len(resume_set | jd_set)
+st.title("📄 AI Resume Ranking System")
+
+job_desc_input = st.text_area("Enter Job Description")
+
+uploaded_files = st.file_uploader(
+    "Upload Resumes", type=["pdf", "docx"], accept_multiple_files=True
+)
 if st.button("Rank Resumes"):
 
     job_desc_list = process_job_description(job_desc_input)
