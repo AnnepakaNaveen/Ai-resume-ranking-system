@@ -94,7 +94,7 @@ if st.button("Rank Resumes"):
     # Sort
     results = sorted(results, key=lambda x: x["final"], reverse=True)
 
-    st.subheader("🏆 Ranked Resumes")
+    st.subheader("Ranked Resumes")
 
     for i, res in enumerate(results, 1):
         st.write(
