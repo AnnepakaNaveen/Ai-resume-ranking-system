@@ -106,5 +106,5 @@ if st.button("Rank Resumes"):
     f"Cosine: {score['cosine']:.3f}, "
     f"Jaccard: {score['jaccard']:.3f}, "
     f"Skill: {score['skill']:.3f}, "
-    f"Final: {score['final']:.3f}"
+    f"Final: {score['final']*100:.2f}%"}"
 )
