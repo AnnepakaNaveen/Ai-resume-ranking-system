@@ -107,7 +107,7 @@ if st.button("Rank Resumes"):
     results = sorted(results, key=lambda x: x["final"], reverse=True)
     # 🎯 Recommended Resume (Top Match)
     if len(results) > 0:
-    best = results[0]
+         best = results[0]
 
     st.success("✅ Recommended Resume for this Job Description")
 
