@@ -102,9 +102,9 @@ if st.button("Rank Resumes"):
         for i, (file, score) in enumerate(ranked_resumes, start=1):
 
            st.write(
-              f"{i}. {file.name} → "
-              f"Cosine: {score['cosine-similarity']:.3f}, "
-              f"Jaccard: {score['jaccard-similariity']:.3f}, "
-              f"Skill: {score['skill-match']:.3f}, "
-              f"Final: {score['final']:.3f}"
-    )
+    f"{i}. {file.name} → "
+    f"Cosine: {score['cosine']:.3f}, "
+    f"Jaccard: {score['jaccard']:.3f}, "
+    f"Skill: {score['skill']:.3f}, "
+    f"Final: {score['final']:.3f}"
+)
