@@ -9,10 +9,10 @@ def set_bg():
     st.markdown(f"""
     <style>
 
-    /* DARK OVERLAY (MAIN FIX) */
+    /* Background with overlay */
     .stApp {{
         background-image:
-            linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+            linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
             url("data:image/jpg;base64,{encoded}");
         background-size: cover;
         background-position: center;
@@ -20,29 +20,31 @@ def set_bg():
 
     /* TITLE */
     h1 {{
-        color: #ffffff !important;
+        color: #ffffff;
         text-align: center;
-        font-size: 42px;
+        font-size: 40px;
         font-weight: bold;
     }}
 
-    /* LABEL TEXT */
+    /* LABELS (IMPORTANT - DARK TEXT) */
     label {{
-        color: #f1f5f9 !important;
+        color: #000000 !important;
+        font-weight: bold;
         font-size: 16px;
     }}
 
-    /* TEXT AREA */
+    /* TEXT AREA (WHITE BOX) */
     textarea {{
-        background-color: rgba(255,255,255,0.95) !important;
-        color: black !important;
+        background-color: #ffffff !important;
+        color: #000000 !important;
         border-radius: 10px !important;
+        padding: 10px;
     }}
 
-    /* UPLOAD BOX */
+    /* FILE UPLOADER BOX */
     .stFileUploader {{
-        background-color: rgba(255,255,255,0.2);
-        padding: 10px;
+        background-color: rgba(255,255,255,0.9);
+        padding: 12px;
         border-radius: 10px;
     }}
 
