@@ -10,7 +10,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import base64
 
 def set_bg():
-    with open("bg.jpg", "rb") as f:
+    with open("download.jpg", "rb") as f:
         data = f.read()
     encoded = base64.b64encode(data).decode()
 
