@@ -9,44 +9,44 @@ def set_bg():
     st.markdown(f"""
     <style>
 
-    /* Background with dark overlay */
+    /* DARK OVERLAY (MAIN FIX) */
     .stApp {{
         background-image:
-            linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+            linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
             url("data:image/jpg;base64,{encoded}");
         background-size: cover;
         background-position: center;
     }}
 
-    /* Title */
+    /* TITLE */
     h1 {{
-        color: #ffffff;
+        color: #ffffff !important;
         text-align: center;
         font-size: 42px;
         font-weight: bold;
     }}
 
-    /* Labels */
+    /* LABEL TEXT */
     label {{
-        color: #e5e7eb !important;
+        color: #f1f5f9 !important;
         font-size: 16px;
     }}
 
-    /* Input box */
+    /* TEXT AREA */
     textarea {{
-        background-color: rgba(255,255,255,0.9) !important;
+        background-color: rgba(255,255,255,0.95) !important;
         color: black !important;
         border-radius: 10px !important;
     }}
 
-    /* Upload box */
+    /* UPLOAD BOX */
     .stFileUploader {{
-        background-color: rgba(255,255,255,0.15);
+        background-color: rgba(255,255,255,0.2);
         padding: 10px;
         border-radius: 10px;
     }}
 
-    /* Button */
+    /* BUTTON */
     .stButton button {{
         background-color: #2563eb;
         color: white;
@@ -59,7 +59,6 @@ def set_bg():
     """, unsafe_allow_html=True)
 
 set_bg()
-
 import streamlit as st
 import numpy as np
 import re
