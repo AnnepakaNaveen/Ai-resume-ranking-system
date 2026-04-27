@@ -7,6 +7,28 @@ from pypdf import PdfReader
 import docx
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import base64
+
+def set_bg():
+    with open("bg.jpg", "rb") as f:
+        data = f.read()
+    encoded = base64.b64encode(data).decode()
+
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/jpg;base64,{encoded}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+set_bg()   
 
 def clean_text(text):
     text = re.sub(r'[^a-zA-Z ]', ' ', text)
