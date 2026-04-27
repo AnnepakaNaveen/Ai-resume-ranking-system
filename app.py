@@ -1,3 +1,65 @@
+import base64
+import streamlit as st
+
+def set_bg():
+    with open("download.jpg", "rb") as f:
+        data = f.read()
+    encoded = base64.b64encode(data).decode()
+
+    st.markdown(f"""
+    <style>
+
+    /* Background with dark overlay */
+    .stApp {{
+        background-image:
+            linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+            url("data:image/jpg;base64,{encoded}");
+        background-size: cover;
+        background-position: center;
+    }}
+
+    /* Title */
+    h1 {{
+        color: #ffffff;
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+    }}
+
+    /* Labels */
+    label {{
+        color: #e5e7eb !important;
+        font-size: 16px;
+    }}
+
+    /* Input box */
+    textarea {{
+        background-color: rgba(255,255,255,0.9) !important;
+        color: black !important;
+        border-radius: 10px !important;
+    }}
+
+    /* Upload box */
+    .stFileUploader {{
+        background-color: rgba(255,255,255,0.15);
+        padding: 10px;
+        border-radius: 10px;
+    }}
+
+    /* Button */
+    .stButton button {{
+        background-color: #2563eb;
+        color: white;
+        border-radius: 10px;
+        font-size: 16px;
+        padding: 8px 20px;
+    }}
+
+    </style>
+    """, unsafe_allow_html=True)
+
+set_bg()
+
 import streamlit as st
 import numpy as np
 import re
