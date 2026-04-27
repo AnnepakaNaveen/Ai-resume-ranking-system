@@ -38,7 +38,7 @@ def extract_text_from_image(file):
         cv2.THRESH_BINARY, 11, 2
     )
 
-    text = pytesseract.image_to_string(thresh, config='--oem 3 --psm 6')
+    text = pytesseract.image_to_string(thresh)
     return clean_text(text)
 
 def skill_match(resume, jd_list):
@@ -96,6 +96,6 @@ if st.button("Rank Resumes"):
 
     results.sort(key=lambda x: x[1], reverse=True)
 
-    st.subheader("🏆 Results")
+    st.subheader(" Results")
     for name, score in results:
         st.write(f"{name} → {score:.2f}%")
